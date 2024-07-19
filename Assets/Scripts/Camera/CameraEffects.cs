@@ -6,6 +6,8 @@ using UnityEngine;
 public class CameraEffects : MonoBehaviour
 {
     private Camera mainCamera;
+    private Vector3 initialPosition;
+
     private SpeedManipulation speedManipulation;
     private Stamina stamina;
 
@@ -24,6 +26,8 @@ public class CameraEffects : MonoBehaviour
         mainCamera = GetComponent<Camera>();    
         speedManipulation = GetComponentInParent<SpeedManipulation>();
         stamina = GetComponentInParent<Stamina>();
+
+        initialPosition = transform.localPosition;
     }
 
     void Update()
