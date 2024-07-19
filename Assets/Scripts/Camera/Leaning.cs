@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Leaning : MonoBehaviour
 {
-    private Camera mainCamera;
     private Vector3 initialPosition;
     public bool leaningRight = false;
     public bool leaningLeft = false;
 
     void Start()
     {
-        mainCamera = GetComponent<Camera>();
         initialPosition = transform.localPosition;
-        Debug.Log(initialPosition);
     }
 
     void Update()
@@ -37,22 +34,22 @@ public class Leaning : MonoBehaviour
         float moveSpeed = Time.deltaTime * 2;
         if (leaningRight)
         {
-            if (mainCamera.transform.localPosition.x < 0.4f) offset = new Vector3(moveSpeed, 0f, 0f);
+            if ( transform.localPosition.x < 0.4f) offset = new Vector3(moveSpeed, 0f, 0f);
         }
         else if (leaningLeft)
         {
-            if (mainCamera.transform.localPosition.x > -0.4f) offset = new Vector3(-moveSpeed, 0f, 0f);
+            if ( transform.localPosition.x > -0.4f) offset = new Vector3(-moveSpeed, 0f, 0f);
         }
         else
         {
-            if (mainCamera.transform.localPosition.x != 0) offset = new Vector3(-Mathf.Sign(mainCamera.transform.localPosition.x) * moveSpeed, 0f, 0f);
+            if ( transform.localPosition.x != 0) offset = new Vector3(-Mathf.Sign(transform.localPosition.x) * moveSpeed, 0f, 0f);
         }
 
-        mainCamera.transform.localPosition += offset;
-        float x = mainCamera.transform.localPosition.x;
+         transform.localPosition += offset;
+        float x =  transform.localPosition.x;
         if ((x > 0 && x < 0.01f) || (x < 0 && x > -0.01f)) // This is to fix screen shaking bug after leaning
         {
-            mainCamera.transform.localPosition = initialPosition;
+             transform.localPosition = initialPosition;
         }
     }
 }
